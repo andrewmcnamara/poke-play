@@ -1,3 +1,4 @@
+import Link from "next/link";
 export interface Pokemon {
   abilities: Ability[];
   base_experience: number;
@@ -196,12 +197,14 @@ async function HomePage() {
   ).json();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="w-screen h-screen flex flex-col">
       {pokemons.results.map((pokemon) => (
-        <div key={pokemon.name}> {pokemon.name}</div>
+        <div key={pokemon.name} className="px-4 py-2 capitalize">
+          <Link href={`/${pokemon.name}`}>{pokemon.name}</Link>
+        </div>
       ))}
       <code>
-        <pre>{JSON.stringify(pokemons, null, 4)}</pre>
+        <pre> {JSON.stringify(pokemons, null, 4)}</pre>
       </code>
     </div>
   );
